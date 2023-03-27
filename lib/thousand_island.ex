@@ -140,8 +140,10 @@ defmodule ThousandIsland do
   @doc false
   @spec child_spec(options()) :: Supervisor.child_spec()
   def child_spec(opts) do
+    {id, opts} = Keyword.pop(opts, :id, __MODULE__)
+
     %{
-      id: __MODULE__,
+      id: id,
       start: {__MODULE__, :start_link, [opts]},
       type: :supervisor,
       restart: :permanent
